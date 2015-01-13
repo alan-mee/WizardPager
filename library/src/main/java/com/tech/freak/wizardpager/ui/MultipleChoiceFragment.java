@@ -22,9 +22,9 @@ import java.util.List;
 import java.util.Set;
 
 import android.app.Activity;
+import android.app.ListFragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ListFragment;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +36,8 @@ import com.tech.freak.wizardpager.R;
 import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
 import com.tech.freak.wizardpager.model.Page;
 
-public class MultipleChoiceFragment extends ListFragment {
+public class MultipleChoiceFragment extends ListFragment
+{
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;

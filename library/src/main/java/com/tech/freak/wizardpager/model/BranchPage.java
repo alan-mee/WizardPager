@@ -19,7 +19,7 @@ package com.tech.freak.wizardpager.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.text.TextUtils;
 import com.tech.freak.wizardpager.ui.SingleChoiceFragment;
 
@@ -28,7 +28,7 @@ import com.tech.freak.wizardpager.ui.SingleChoiceFragment;
  * next set of steps in the wizard may change.
  */
 public class BranchPage extends SingleFixedChoicePage {
-    private List<Branch> mBranches = new ArrayList<Branch>();
+    private List<Branch> _branches = new ArrayList<Branch>();
 
     public BranchPage(ModelCallbacks callbacks, String title) {
         super(callbacks, title);
@@ -40,7 +40,7 @@ public class BranchPage extends SingleFixedChoicePage {
             return this;
         }
 
-        for (Branch branch : mBranches) {
+        for (Branch branch : _branches) {
             Page found = branch.childPageList.findByKey(key);
             if (found != null) {
                 return found;
@@ -53,8 +53,8 @@ public class BranchPage extends SingleFixedChoicePage {
     @Override
     public void flattenCurrentPageSequence(ArrayList<Page> destination) {
         super.flattenCurrentPageSequence(destination);
-        for (Branch branch : mBranches) {
-            if (branch.choice.equals(mData.getString(Page.SIMPLE_DATA_KEY))) {
+        for (Branch branch : _branches) {
+            if (branch.choice.equals(_data.getString(Page.SIMPLE_DATA_KEY))) {
                 branch.childPageList.flattenCurrentPageSequence(destination);
                 break;
             }
@@ -66,7 +66,7 @@ public class BranchPage extends SingleFixedChoicePage {
         for (Page page : childPageList) {
             page.setParentKey(choice);
         }
-        mBranches.add(new Branch(choice, childPageList));
+        _branches.add(new Branch(choice, childPageList));
         return this;
     }
 
@@ -76,31 +76,31 @@ public class BranchPage extends SingleFixedChoicePage {
     }
 
     public String getOptionAt(int position) {
-        return mBranches.get(position).choice;
+        return _branches.get(position).choice;
     }
 
     public int getOptionCount() {
-        return mBranches.size();
+        return _branches.size();
     }
 
     @Override
     public void getReviewItems(ArrayList<ReviewItem> dest) {
-        dest.add(new ReviewItem(getTitle(), mData.getString(SIMPLE_DATA_KEY), getKey()));
+        dest.add(new ReviewItem(getTitle(), _data.getString(SIMPLE_DATA_KEY), getKey()));
     }
 
     @Override
     public boolean isCompleted() {
-        return !TextUtils.isEmpty(mData.getString(SIMPLE_DATA_KEY));
+        return !TextUtils.isEmpty(_data.getString(SIMPLE_DATA_KEY));
     }
 
     @Override
     public void notifyDataChanged() {
-        mCallbacks.onPageTreeChanged();
+        _callbacks.onPageTreeChanged();
         super.notifyDataChanged();
     }
 
     public BranchPage setValue(String value) {
-        mData.putString(SIMPLE_DATA_KEY, value);
+        _data.putString(SIMPLE_DATA_KEY, value);
         return this;
     }
 

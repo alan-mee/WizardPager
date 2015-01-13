@@ -16,84 +16,97 @@
 
 package com.tech.freak.wizardpager.model;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 
 /**
  * Represents a single page in the wizard.
  */
-public abstract class Page implements PageTreeNode {
-    /**
-     * The key into {@link #getData()} used for wizards with simple (single) values.
-     */
-    public static final String SIMPLE_DATA_KEY = "_";
+public abstract class Page implements PageTreeNode
+{
+	/**
+	 * The key into {@link #getData()} used for wizards with simple (single) values.
+	 */
+	public static final String SIMPLE_DATA_KEY = "_";
 
-    protected ModelCallbacks mCallbacks;
+	protected ModelCallbacks _callbacks;
 
-    /**
-     * Current wizard values/selections.
-     */
-    protected Bundle mData = new Bundle();
-    protected String mTitle;
-    protected boolean mRequired = false;
-    protected String mParentKey;
+	/**
+	 * Current wizard values/selections.
+	 */
+	protected Bundle _data = new Bundle();
+	protected String _title;
+	protected boolean _required = false;
+	protected String _parentKey;
 
-    protected Page(ModelCallbacks callbacks, String title) {
-        mCallbacks = callbacks;
-        mTitle = title;
-    }
+	protected Page(ModelCallbacks callbacks, String title)
+	{
+		_callbacks = callbacks;
+		_title = title;
+	}
 
-    public Bundle getData() {
-        return mData;
-    }
+	public Bundle getData()
+	{
+		return _data;
+	}
 
-    public String getTitle() {
-        return mTitle;
-    }
+	public String getTitle()
+	{
+		return _title;
+	}
 
-    public boolean isRequired() {
-        return mRequired;
-    }
+	public boolean isRequired()
+	{
+		return _required;
+	}
 
-    void setParentKey(String parentKey) {
-        mParentKey = parentKey;
-    }
+	void setParentKey(String parentKey)
+	{
+		_parentKey = parentKey;
+	}
 
-    @Override
-    public Page findByKey(String key) {
-        return getKey().equals(key) ? this : null;
-    }
+	@Override
+	public Page findByKey(String key)
+	{
+		return getKey().equals(key) ? this : null;
+	}
 
-    @Override
-    public void flattenCurrentPageSequence(ArrayList<Page> dest) {
-        dest.add(this);
-    }
+	@Override
+	public void flattenCurrentPageSequence(ArrayList<Page> dest)
+	{
+		dest.add(this);
+	}
 
-    public abstract Fragment createFragment();
+	public abstract Fragment createFragment();
 
-    public String getKey() {
-        return (mParentKey != null) ? mParentKey + ":" + mTitle : mTitle;
-    }
+	public String getKey()
+	{
+		return (_parentKey != null) ? _parentKey + ":" + _title : _title;
+	}
 
-    public abstract void getReviewItems(ArrayList<ReviewItem> dest);
+	public abstract void getReviewItems(ArrayList<ReviewItem> dest);
 
-    public boolean isCompleted() {
-        return true;
-    }
+	public boolean isCompleted()
+	{
+		return true;
+	}
 
-    public void resetData(Bundle data) {
-        mData = data;
-        notifyDataChanged();
-    }
+	public void resetData(Bundle data)
+	{
+		_data = data;
+		notifyDataChanged();
+	}
 
-    public void notifyDataChanged() {
-        mCallbacks.onPageDataChanged(this);
-    }
+	public void notifyDataChanged()
+	{
+		_callbacks.onPageDataChanged(this);
+	}
 
-    public Page setRequired(boolean required) {
-        mRequired = required;
-        return this;
-    }
+	public Page setRequired(boolean required)
+	{
+		_required = required;
+		return this;
+	}
 }

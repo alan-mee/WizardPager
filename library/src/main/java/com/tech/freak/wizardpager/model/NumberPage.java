@@ -1,6 +1,7 @@
 package com.tech.freak.wizardpager.model;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+
 import com.tech.freak.wizardpager.ui.NumberFragment;
 
 public class NumberPage extends TextPage {
@@ -13,5 +14,4 @@ public class NumberPage extends TextPage {
 	public Fragment createFragment() {
 		return NumberFragment.create(getKey());
 	}
-
 }

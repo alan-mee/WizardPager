@@ -19,7 +19,7 @@ package com.tech.freak.wizardpager.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.text.TextUtils;
 import com.tech.freak.wizardpager.ui.SingleChoiceFragment;
 
@@ -48,12 +48,12 @@ public class SingleFixedChoicePage extends Page {
 
     @Override
     public void getReviewItems(ArrayList<ReviewItem> dest) {
-        dest.add(new ReviewItem(getTitle(), mData.getString(SIMPLE_DATA_KEY), getKey()));
+        dest.add(new ReviewItem(getTitle(), _data.getString(SIMPLE_DATA_KEY), getKey()));
     }
 
     @Override
     public boolean isCompleted() {
-        return !TextUtils.isEmpty(mData.getString(SIMPLE_DATA_KEY));
+        return !TextUtils.isEmpty(_data.getString(SIMPLE_DATA_KEY));
     }
 
     public SingleFixedChoicePage setChoices(String... choices) {
@@ -62,7 +62,7 @@ public class SingleFixedChoicePage extends Page {
     }
 
     public SingleFixedChoicePage setValue(String value) {
-        mData.putString(SIMPLE_DATA_KEY, value);
+        _data.putString(SIMPLE_DATA_KEY, value);
         return this;
     }
 }

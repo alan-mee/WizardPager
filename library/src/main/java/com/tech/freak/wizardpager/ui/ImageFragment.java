@@ -3,14 +3,14 @@ package com.tech.freak.wizardpager.ui;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +21,8 @@ import android.widget.TextView;
 import com.tech.freak.wizardpager.R;
 import com.tech.freak.wizardpager.model.Page;
 
-public class ImageFragment extends Fragment {
-
+public class ImageFragment extends Fragment
+{
 	private static final String NEW_IMAGE_URI = "new_image_uri";
 	private static final int GALLERY_REQUEST_CODE = 0;
 	private static final int CAMERA_REQUEST_CODE = 1;

@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ListFragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +33,8 @@ import com.tech.freak.wizardpager.R;
 import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 
-public class SingleChoiceFragment extends ListFragment {
+public class SingleChoiceFragment extends ListFragment
+{
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;

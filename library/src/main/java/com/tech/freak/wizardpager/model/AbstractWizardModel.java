@@ -29,14 +29,14 @@ import java.util.List;
  * To create an actual wizard model, extend this class and implement {@link #onNewRootPageList()}.
  */
 public abstract class AbstractWizardModel implements ModelCallbacks {
-    protected Context mContext;
+    protected Context _context;
 
-    private List<ModelCallbacks> mListeners = new ArrayList<ModelCallbacks>();
-    private PageList mRootPageList;
+    private List<ModelCallbacks> _listeners = new ArrayList<ModelCallbacks>();
+    private PageList _rootPageList;
 
     public AbstractWizardModel(Context context) {
-    	mContext = context;
-    	mRootPageList = onNewRootPageList();
+    	_context = context;
+    	_rootPageList = onNewRootPageList();
     }
 
     /**
@@ -48,8 +48,8 @@ public abstract class AbstractWizardModel implements ModelCallbacks {
     public void onPageDataChanged(Page page) {
         // can't use for each because of concurrent modification (review fragment
         // can get added or removed and will register itself as a listener)
-        for (int i = 0; i < mListeners.size(); i++) {
-            mListeners.get(i).onPageDataChanged(page);
+        for (int i = 0; i < _listeners.size(); i++) {
+            _listeners.get(i).onPageDataChanged(page);
         }
     }
 
@@ -57,23 +57,23 @@ public abstract class AbstractWizardModel implements ModelCallbacks {
     public void onPageTreeChanged() {
         // can't use for each because of concurrent modification (review fragment
         // can get added or removed and will register itself as a listener)
-        for (int i = 0; i < mListeners.size(); i++) {
-            mListeners.get(i).onPageTreeChanged();
+        for (int i = 0; i < _listeners.size(); i++) {
+            _listeners.get(i).onPageTreeChanged();
         }
     }
 
     public Page findByKey(String key) {
-        return mRootPageList.findByKey(key);
+        return _rootPageList.findByKey(key);
     }
 
     public void load(Bundle savedValues) {
         for (String key : savedValues.keySet()) {
-            mRootPageList.findByKey(key).resetData(savedValues.getBundle(key));
+            _rootPageList.findByKey(key).resetData(savedValues.getBundle(key));
         }
     }
 
     public void registerListener(ModelCallbacks listener) {
-        mListeners.add(listener);
+        _listeners.add(listener);
     }
 
     public Bundle save() {
@@ -90,11 +90,11 @@ public abstract class AbstractWizardModel implements ModelCallbacks {
      */
     public List<Page> getCurrentPageSequence() {
         ArrayList<Page> flattened = new ArrayList<Page>();
-        mRootPageList.flattenCurrentPageSequence(flattened);
+        _rootPageList.flattenCurrentPageSequence(flattened);
         return flattened;
     }
 
     public void unregisterListener(ModelCallbacks listener) {
-        mListeners.remove(listener);
+        _listeners.remove(listener);
     }
 }

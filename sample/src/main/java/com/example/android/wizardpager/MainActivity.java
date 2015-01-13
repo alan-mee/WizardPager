@@ -16,14 +16,14 @@
 
 package com.example.android.wizardpager;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
@@ -39,7 +39,7 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements
+public class MainActivity extends Activity implements
 		PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks
 {
 	private ViewPager mPager;
@@ -68,7 +68,7 @@ public class MainActivity extends FragmentActivity implements
 
 		mWizardModel.registerListener(this);
 
-		mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+		mPagerAdapter = new MyPagerAdapter(getFragmentManager());
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPager.setAdapter(mPagerAdapter);
 		mStepPagerStrip = (StepPagerStrip) findViewById(R.id.strip);
@@ -126,7 +126,7 @@ public class MainActivity extends FragmentActivity implements
 											null).create();
 						}
 					};
-					dg.show(getSupportFragmentManager(), "place_order_dialog");
+					dg.show(getFragmentManager(), "place_order_dialog");
 				} else {
 					if (mEditingAfterReview) {
 						mPager.setCurrentItem(mPagerAdapter.getCount() - 1);

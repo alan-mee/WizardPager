@@ -16,9 +16,10 @@
 
 package com.tech.freak.wizardpager.model;
 
+import android.app.Fragment;
+
 import java.util.ArrayList;
 
-import android.support.v4.app.Fragment;
 import com.tech.freak.wizardpager.ui.MultipleChoiceFragment;
 
 /**
@@ -38,7 +39,7 @@ public class MultipleFixedChoicePage extends SingleFixedChoicePage {
     public void getReviewItems(ArrayList<ReviewItem> dest) {
         StringBuilder sb = new StringBuilder();
 
-        ArrayList<String> selections = mData.getStringArrayList(SIMPLE_DATA_KEY);
+        ArrayList<String> selections = _data.getStringArrayList(SIMPLE_DATA_KEY);
         if (selections != null && selections.size() > 0) {
             for (String selection : selections) {
                 if (sb.length() > 0) {
@@ -53,7 +54,7 @@ public class MultipleFixedChoicePage extends SingleFixedChoicePage {
 
     @Override
     public boolean isCompleted() {
-        ArrayList<String> selections = mData.getStringArrayList(SIMPLE_DATA_KEY);
+        ArrayList<String> selections = _data.getStringArrayList(SIMPLE_DATA_KEY);
         return selections != null && selections.size() > 0;
     }
 }

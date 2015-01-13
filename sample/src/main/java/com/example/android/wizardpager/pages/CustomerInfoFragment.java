@@ -1,9 +1,9 @@
 package com.example.android.wizardpager.pages;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,7 +18,8 @@ import com.tech.freak.wizardpager.ui.PageFragmentCallbacks;
 /**
  * Created by TechFreak on 04/09/2014.
  */
-public class CustomerInfoFragment extends Fragment {
+public class CustomerInfoFragment extends Fragment
+{
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;

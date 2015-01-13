@@ -28,12 +28,12 @@ public class CustomerInfoPage extends Page {
 
     @Override
     public void getReviewItems(ArrayList<ReviewItem> dest) {
-        dest.add(new ReviewItem("Your name", mData.getString(NAME_DATA_KEY), getKey(), -1));
-        dest.add(new ReviewItem("Your email", mData.getString(EMAIL_DATA_KEY), getKey(), -1));
+        dest.add(new ReviewItem("Your name", _data.getString(NAME_DATA_KEY), getKey(), -1));
+        dest.add(new ReviewItem("Your email", _data.getString(EMAIL_DATA_KEY), getKey(), -1));
     }
 
     @Override
     public boolean isCompleted() {
-        return !TextUtils.isEmpty(mData.getString(NAME_DATA_KEY));
+        return !TextUtils.isEmpty(_data.getString(NAME_DATA_KEY));
     }
 }

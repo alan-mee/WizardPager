@@ -1,6 +1,7 @@
 package com.tech.freak.wizardpager.model;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+
 import com.tech.freak.wizardpager.ui.ImageFragment;
 
 public class ImagePage extends TextPage {
@@ -15,7 +16,7 @@ public class ImagePage extends TextPage {
 	}
 
 	public ImagePage setValue(String value) {
-		mData.putString(SIMPLE_DATA_KEY, value);
+		_data.putString(SIMPLE_DATA_KEY, value);
 		return this;
 	}
 }

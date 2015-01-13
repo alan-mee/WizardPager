@@ -1,9 +1,9 @@
 package com.tech.freak.wizardpager.ui;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -16,7 +16,8 @@ import android.widget.TextView;
 import com.tech.freak.wizardpager.R;
 import com.tech.freak.wizardpager.model.Page;
 
-public class TextFragment extends Fragment {
+public class TextFragment extends Fragment
+{
 	protected static final String ARG_KEY = "key";
 
 	private PageFragmentCallbacks mCallbacks;
