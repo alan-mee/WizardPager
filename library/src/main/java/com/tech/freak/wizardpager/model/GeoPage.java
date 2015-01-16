@@ -16,7 +16,7 @@ public class GeoPage extends TextPage {
 	}
 
 	public GeoPage setValue(String value) {
-		_data.putString(SIMPLE_DATA_KEY, value);
+		_data.putString(DK_STRING, value);
 		return this;
 	}
 }

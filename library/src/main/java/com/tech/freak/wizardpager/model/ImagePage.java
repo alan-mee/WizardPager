@@ -16,7 +16,7 @@ public class ImagePage extends TextPage {
 	}
 
 	public ImagePage setValue(String value) {
-		_data.putString(SIMPLE_DATA_KEY, value);
+		_data.putString(DK_STRING, value);
 		return this;
 	}
 }

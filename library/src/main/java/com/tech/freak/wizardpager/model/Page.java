@@ -29,27 +29,35 @@ public abstract class Page implements PageTreeNode
 	/**
 	 * The key into {@link #getData()} used for wizards with simple (single) values.
 	 */
-	public static final String SIMPLE_DATA_KEY = "_";
+	public static final String DK_STRING			= "_str";
+	public static final String DK_HINT				= "_hint";
+	public static final String DK_MAX_LENGTH	= "_mtl";
 
 	protected ModelCallbacks _callbacks;
 
 	/**
 	 * Current wizard values/selections.
 	 */
+	protected final String _name;
 	protected Bundle _data = new Bundle();
 	protected String _title;
 	protected boolean _required = false;
 	protected String _parentKey;
 
-	protected Page(ModelCallbacks callbacks, String title)
+	protected Page(ModelCallbacks callbacks, String name, String title)
 	{
 		_callbacks = callbacks;
+		_name = name;
 		_title = title;
 	}
 
 	public Bundle getData()
 	{
 		return _data;
+	}
+
+	public String getName() {
+		return _name;
 	}
 
 	public String getTitle()
@@ -83,7 +91,7 @@ public abstract class Page implements PageTreeNode
 
 	public String getKey()
 	{
-		return (_parentKey != null) ? _parentKey + ":" + _title : _title;
+		return (_parentKey != null) ? _parentKey + ":" + _name : _name;
 	}
 
 	public abstract void getReviewItems(ArrayList<ReviewItem> dest);

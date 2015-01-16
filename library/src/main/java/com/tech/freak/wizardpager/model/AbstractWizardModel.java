@@ -25,76 +25,90 @@ import java.util.List;
 /**
  * Represents a wizard model, including the pages/steps in the wizard, their dependencies, and their
  * currently populated choices/values/selections.
- *
+ * <p>
  * To create an actual wizard model, extend this class and implement {@link #onNewRootPageList()}.
  */
-public abstract class AbstractWizardModel implements ModelCallbacks {
-    protected Context _context;
+public abstract class AbstractWizardModel implements ModelCallbacks
+{
+	protected Context _context;
 
-    private List<ModelCallbacks> _listeners = new ArrayList<ModelCallbacks>();
-    private PageList _rootPageList;
+	private List<ModelCallbacks> _listeners = new ArrayList<ModelCallbacks>();
+	private PageList _rootPageList;
 
-    public AbstractWizardModel(Context context) {
-    	_context = context;
-    	_rootPageList = onNewRootPageList();
-    }
+	public AbstractWizardModel(Context context)
+	{
+		_context = context;
+		_rootPageList = onNewRootPageList();
+	}
 
-    /**
-     * Override this to define a new wizard model.
-     */
-    protected abstract PageList onNewRootPageList();
+	/**
+	 * Override this to define a new wizard model.
+	 *
+	 * @return List of Page instances.
+	 */
+	protected abstract PageList onNewRootPageList();
 
-    @Override
-    public void onPageDataChanged(Page page) {
-        // can't use for each because of concurrent modification (review fragment
-        // can get added or removed and will register itself as a listener)
-        for (int i = 0; i < _listeners.size(); i++) {
-            _listeners.get(i).onPageDataChanged(page);
-        }
-    }
+	@Override
+	public void onPageDataChanged(Page page)
+	{
+		// can't use for each because of concurrent modification (review fragment
+		// can get added or removed and will register itself as a listener)
+		for (int i = 0; i < _listeners.size(); i++) {
+			_listeners.get(i).onPageDataChanged(page);
+		}
+	}
 
-    @Override
-    public void onPageTreeChanged() {
-        // can't use for each because of concurrent modification (review fragment
-        // can get added or removed and will register itself as a listener)
-        for (int i = 0; i < _listeners.size(); i++) {
-            _listeners.get(i).onPageTreeChanged();
-        }
-    }
+	@Override
+	public void onPageTreeChanged()
+	{
+		// can't use for each because of concurrent modification (review fragment
+		// can get added or removed and will register itself as a listener)
+		for (int i = 0; i < _listeners.size(); i++) {
+			_listeners.get(i).onPageTreeChanged();
+		}
+	}
 
-    public Page findByKey(String key) {
-        return _rootPageList.findByKey(key);
-    }
+	public Page findByKey(String key)
+	{
+		return _rootPageList.findByKey(key);
+	}
 
-    public void load(Bundle savedValues) {
-        for (String key : savedValues.keySet()) {
-            _rootPageList.findByKey(key).resetData(savedValues.getBundle(key));
-        }
-    }
+	public void load(Bundle savedValues)
+	{
+		for (String key : savedValues.keySet()) {
+			_rootPageList.findByKey(key).resetData(savedValues.getBundle(key));
+		}
+	}
 
-    public void registerListener(ModelCallbacks listener) {
-        _listeners.add(listener);
-    }
+	public void registerListener(ModelCallbacks listener)
+	{
+		_listeners.add(listener);
+	}
 
-    public Bundle save() {
-        Bundle bundle = new Bundle();
-        for (Page page : getCurrentPageSequence()) {
-            bundle.putBundle(page.getKey(), page.getData());
-        }
-        return bundle;
-    }
+	public Bundle save()
+	{
+		Bundle bundle = new Bundle();
+		for (Page page : getCurrentPageSequence()) {
+			bundle.putBundle(page.getKey(), page.getData());
+		}
+		return bundle;
+	}
 
-    /**
-     * Gets the current list of wizard steps, flattening nested (dependent) pages based on the
-     * user's choices.
-     */
-    public List<Page> getCurrentPageSequence() {
-        ArrayList<Page> flattened = new ArrayList<Page>();
-        _rootPageList.flattenCurrentPageSequence(flattened);
-        return flattened;
-    }
+	/**
+	 * Gets the current list of wizard steps, flattening nested (dependent) pages based on the
+	 * user's choices.
+	 *
+	 * @return List of Page instances.
+	 */
+	public List<Page> getCurrentPageSequence()
+	{
+		ArrayList<Page> flattened = new ArrayList<Page>();
+		_rootPageList.flattenCurrentPageSequence(flattened);
+		return flattened;
+	}
 
-    public void unregisterListener(ModelCallbacks listener) {
-        _listeners.remove(listener);
-    }
+	public void unregisterListener(ModelCallbacks listener)
+	{
+		_listeners.remove(listener);
+	}
 }

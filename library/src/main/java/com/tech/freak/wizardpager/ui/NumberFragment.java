@@ -19,9 +19,9 @@ public class NumberFragment extends TextFragment {
 	@Override
 	protected void setInputType() {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+			_editTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
 		} else {
-			mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER
+			_editTextInput.setInputType(InputType.TYPE_CLASS_NUMBER
 					| InputType.TYPE_NUMBER_VARIATION_NORMAL);
 		}
 	}

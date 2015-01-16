@@ -54,7 +54,7 @@ public class BranchPage extends SingleFixedChoicePage {
     public void flattenCurrentPageSequence(ArrayList<Page> destination) {
         super.flattenCurrentPageSequence(destination);
         for (Branch branch : _branches) {
-            if (branch.choice.equals(_data.getString(Page.SIMPLE_DATA_KEY))) {
+            if (branch.choice.equals(_data.getString(Page.DK_STRING))) {
                 branch.childPageList.flattenCurrentPageSequence(destination);
                 break;
             }
@@ -85,12 +85,12 @@ public class BranchPage extends SingleFixedChoicePage {
 
     @Override
     public void getReviewItems(ArrayList<ReviewItem> dest) {
-        dest.add(new ReviewItem(getTitle(), _data.getString(SIMPLE_DATA_KEY), getKey()));
+        dest.add(new ReviewItem(getTitle(), _data.getString(DK_STRING), getKey()));
     }
 
     @Override
     public boolean isCompleted() {
-        return !TextUtils.isEmpty(_data.getString(SIMPLE_DATA_KEY));
+        return !TextUtils.isEmpty(_data.getString(DK_STRING));
     }
 
     @Override
@@ -100,7 +100,7 @@ public class BranchPage extends SingleFixedChoicePage {
     }
 
     public BranchPage setValue(String value) {
-        _data.putString(SIMPLE_DATA_KEY, value);
+        _data.putString(DK_STRING, value);
         return this;
     }
 
