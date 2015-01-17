@@ -29,8 +29,8 @@ import com.tech.freak.wizardpager.ui.SingleChoiceFragment;
 public class SingleFixedChoicePage extends Page {
     protected ArrayList<String> mChoices = new ArrayList<String>();
 
-    public SingleFixedChoicePage(ModelCallbacks callbacks, String title) {
-        super(callbacks, title);
+    public SingleFixedChoicePage(ModelCallbacks callbacks, String name, String title) {
+        super(callbacks, name, title);
     }
 
     @Override

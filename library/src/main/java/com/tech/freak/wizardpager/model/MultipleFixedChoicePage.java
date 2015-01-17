@@ -25,36 +25,41 @@ import com.tech.freak.wizardpager.ui.MultipleChoiceFragment;
 /**
  * A page offering the user a number of non-mutually exclusive choices.
  */
-public class MultipleFixedChoicePage extends SingleFixedChoicePage {
-    public MultipleFixedChoicePage(ModelCallbacks callbacks, String title) {
-        super(callbacks, title);
-    }
+public class MultipleFixedChoicePage extends SingleFixedChoicePage
+{
+	public MultipleFixedChoicePage(ModelCallbacks callbacks, String name, String title)
+	{
+		super(callbacks, name, title);
+	}
 
-    @Override
-    public Fragment createFragment() {
-        return MultipleChoiceFragment.create(getKey());
-    }
+	@Override
+	public Fragment createFragment()
+	{
+		return MultipleChoiceFragment.create(getKey());
+	}
 
-    @Override
-    public void getReviewItems(ArrayList<ReviewItem> dest) {
-        StringBuilder sb = new StringBuilder();
+	@Override
+	public void getReviewItems(ArrayList<ReviewItem> dest)
+	{
+		StringBuilder sb = new StringBuilder();
 
-        ArrayList<String> selections = _data.getStringArrayList(DK_STRING);
-        if (selections != null && selections.size() > 0) {
-            for (String selection : selections) {
-                if (sb.length() > 0) {
-                    sb.append(", ");
-                }
-                sb.append(selection);
-            }
-        }
+		ArrayList<String> selections = _data.getStringArrayList(DK_STRING);
+		if (selections != null && selections.size() > 0) {
+			for (String selection : selections) {
+				if (sb.length() > 0) {
+					sb.append(", ");
+				}
+				sb.append(selection);
+			}
+		}
 
-        dest.add(new ReviewItem(getTitle(), sb.toString(), getKey()));
-    }
+		dest.add(new ReviewItem(getTitle(), sb.toString(), getKey()));
+	}
 
-    @Override
-    public boolean isCompleted() {
-        ArrayList<String> selections = _data.getStringArrayList(DK_STRING);
-        return selections != null && selections.size() > 0;
-    }
+	@Override
+	public boolean isCompleted()
+	{
+		ArrayList<String> selections = _data.getStringArrayList(DK_STRING);
+		return selections != null && selections.size() > 0;
+	}
 }

@@ -21,96 +21,111 @@ import java.util.List;
 
 import android.app.Fragment;
 import android.text.TextUtils;
+
 import com.tech.freak.wizardpager.ui.SingleChoiceFragment;
 
 /**
  * A page representing a branching point in the wizard. Depending on which choice is selected, the
  * next set of steps in the wizard may change.
  */
-public class BranchPage extends SingleFixedChoicePage {
-    private List<Branch> _branches = new ArrayList<Branch>();
+public class BranchPage extends SingleFixedChoicePage
+{
+	private List<Branch> _branches = new ArrayList<Branch>();
 
-    public BranchPage(ModelCallbacks callbacks, String title) {
-        super(callbacks, title);
-    }
+	public BranchPage(ModelCallbacks callbacks, String name, String title)
+	{
+		super(callbacks, name, title);
+	}
 
-    @Override
-    public Page findByKey(String key) {
-        if (getKey().equals(key)) {
-            return this;
-        }
+	@Override
+	public Page findByKey(String key)
+	{
+		if (getKey().equals(key)) {
+			return this;
+		}
 
-        for (Branch branch : _branches) {
-            Page found = branch.childPageList.findByKey(key);
-            if (found != null) {
-                return found;
-            }
-        }
+		for (Branch branch : _branches) {
+			Page found = branch.childPageList.findByKey(key);
+			if (found != null) {
+				return found;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    @Override
-    public void flattenCurrentPageSequence(ArrayList<Page> destination) {
-        super.flattenCurrentPageSequence(destination);
-        for (Branch branch : _branches) {
-            if (branch.choice.equals(_data.getString(Page.DK_STRING))) {
-                branch.childPageList.flattenCurrentPageSequence(destination);
-                break;
-            }
-        }
-    }
+	@Override
+	public void flattenCurrentPageSequence(ArrayList<Page> destination)
+	{
+		super.flattenCurrentPageSequence(destination);
+		for (Branch branch : _branches) {
+			if (branch.choice.equals(_data.getString(Page.DK_STRING))) {
+				branch.childPageList.flattenCurrentPageSequence(destination);
+				break;
+			}
+		}
+	}
 
-    public BranchPage addBranch(String choice, Page... childPages) {
-        PageList childPageList = new PageList(childPages);
-        for (Page page : childPageList) {
-            page.setParentKey(choice);
-        }
-        _branches.add(new Branch(choice, childPageList));
-        return this;
-    }
+	public BranchPage addBranch(String choice, Page... childPages)
+	{
+		PageList childPageList = new PageList(childPages);
+		for (Page page : childPageList) {
+			page.setParentKey(choice);
+		}
+		_branches.add(new Branch(choice, childPageList));
+		return this;
+	}
 
-    @Override
-    public Fragment createFragment() {
-        return SingleChoiceFragment.create(getKey());
-    }
+	@Override
+	public Fragment createFragment()
+	{
+		return SingleChoiceFragment.create(getKey());
+	}
 
-    public String getOptionAt(int position) {
-        return _branches.get(position).choice;
-    }
+	public String getOptionAt(int position)
+	{
+		return _branches.get(position).choice;
+	}
 
-    public int getOptionCount() {
-        return _branches.size();
-    }
+	public int getOptionCount()
+	{
+		return _branches.size();
+	}
 
-    @Override
-    public void getReviewItems(ArrayList<ReviewItem> dest) {
-        dest.add(new ReviewItem(getTitle(), _data.getString(DK_STRING), getKey()));
-    }
+	@Override
+	public void getReviewItems(ArrayList<ReviewItem> dest)
+	{
+		dest.add(new ReviewItem(getTitle(), _data.getString(DK_STRING), getKey()));
+	}
 
-    @Override
-    public boolean isCompleted() {
-        return !TextUtils.isEmpty(_data.getString(DK_STRING));
-    }
+	@Override
+	public boolean isCompleted()
+	{
+		return !TextUtils.isEmpty(_data.getString(DK_STRING));
+	}
 
-    @Override
-    public void notifyDataChanged() {
-        _callbacks.onPageTreeChanged();
-        super.notifyDataChanged();
-    }
+	@Override
+	public void notifyDataChanged()
+	{
+		_callbacks.onPageTreeChanged();
+		super.notifyDataChanged();
+	}
 
-    public BranchPage setValue(String value) {
-        _data.putString(DK_STRING, value);
-        return this;
-    }
+	public BranchPage setValue(String value)
+	{
+		_data.putString(DK_STRING, value);
+		return this;
+	}
 
-    private static class Branch {
-        public String choice;
-        public PageList childPageList;
+	private static class Branch
+	{
+		public String choice;
+		public PageList childPageList;
 
-        private Branch(String choice, PageList childPageList) {
-            this.choice = choice;
-            this.childPageList = childPageList;
-        }
-    }
+		private Branch(String choice, PageList childPageList)
+		{
+			this.choice = choice;
+			this.childPageList = childPageList;
+		}
+	}
 }

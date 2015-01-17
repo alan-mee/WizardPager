@@ -4,14 +4,16 @@ import android.app.Fragment;
 
 import com.tech.freak.wizardpager.ui.NumberFragment;
 
-public class NumberPage extends TextPage {
-
-	public NumberPage(ModelCallbacks callbacks, String title) {
-		super(callbacks, title);
+public class NumberPage extends TextPage
+{
+	public NumberPage(ModelCallbacks callbacks, String name, String title)
+	{
+		super(callbacks, name, title);
 	}
 
 	@Override
-	public Fragment createFragment() {
+	public Fragment createFragment()
+	{
 		return NumberFragment.create(getKey());
 	}
 }
