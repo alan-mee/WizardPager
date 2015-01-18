@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.text.TextUtils;
 import com.tech.freak.wizardpager.ui.SingleChoiceFragment;
 
@@ -29,8 +30,8 @@ import com.tech.freak.wizardpager.ui.SingleChoiceFragment;
 public class SingleFixedChoicePage extends Page {
     protected ArrayList<String> mChoices = new ArrayList<String>();
 
-    public SingleFixedChoicePage(ModelCallbacks callbacks, String name, String title) {
-        super(callbacks, name, title);
+    public SingleFixedChoicePage(ModelCallbacks callbacks, Resources resources, String name, String title) {
+        super(callbacks, resources, name, title);
     }
 
     @Override

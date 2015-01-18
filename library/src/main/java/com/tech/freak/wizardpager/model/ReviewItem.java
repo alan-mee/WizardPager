@@ -25,10 +25,10 @@ public class ReviewItem
 {
 	public static final int DEFAULT_WEIGHT = 0;
 
-	private int mWeight;
-	private String mTitle;
-	private String mDisplayValue;
-	private String mPageKey;
+	private int _weight;
+	private String _title;
+	private String _displayValue;
+	private String _pageKey;
 
 	public ReviewItem(String title, String displayValue, String pageKey)
 	{
@@ -37,49 +37,49 @@ public class ReviewItem
 
 	public ReviewItem(String title, String displayValue, String pageKey, int weight)
 	{
-		mTitle = title;
-		mDisplayValue = displayValue;
-		mPageKey = pageKey;
-		mWeight = weight;
+		_title = title;
+		_displayValue = displayValue;
+		_pageKey = pageKey;
+		_weight = weight;
 	}
 
 	public String getDisplayValue()
 	{
-		return mDisplayValue;
+		return _displayValue;
 	}
 
 	public void setDisplayValue(String displayValue)
 	{
-		mDisplayValue = displayValue;
+		_displayValue = displayValue;
 	}
 
 	public String getPageKey()
 	{
-		return mPageKey;
+		return _pageKey;
 	}
 
 	public void setPageKey(String pageKey)
 	{
-		mPageKey = pageKey;
+		_pageKey = pageKey;
 	}
 
 	public String getTitle()
 	{
-		return mTitle;
+		return _title;
 	}
 
 	public void setTitle(String title)
 	{
-		mTitle = title;
+		_title = title;
 	}
 
 	public int getWeight()
 	{
-		return mWeight;
+		return _weight;
 	}
 
 	public void setWeight(int weight)
 	{
-		mWeight = weight;
+		_weight = weight;
 	}
 }

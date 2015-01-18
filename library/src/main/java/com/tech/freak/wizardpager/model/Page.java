@@ -17,6 +17,7 @@
 package com.tech.freak.wizardpager.model;
 
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -43,12 +44,19 @@ public abstract class Page implements PageTreeNode
 	protected String _title;
 	protected boolean _required = false;
 	protected String _parentKey;
+	protected Resources _res;
 
-	protected Page(ModelCallbacks callbacks, String name, String title)
+	protected Page(ModelCallbacks callbacks, Resources resources, String name, String title)
 	{
 		_callbacks = callbacks;
 		_name = name;
 		_title = title;
+		_res = resources;
+	}
+
+	protected String str(int resId)
+	{
+		return _res.getString(resId);
 	}
 
 	public Bundle getData()

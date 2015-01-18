@@ -3,13 +3,14 @@ package com.tech.freak.wizardpager.model;
 import java.util.ArrayList;
 
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.text.TextUtils;
 import com.tech.freak.wizardpager.ui.TextFragment;
 
 public class TextPage extends Page
 {
-	public TextPage(ModelCallbacks callbacks, String name, String title) {
-		super(callbacks, name, title);
+	public TextPage(ModelCallbacks callbacks, Resources resources, String name, String title) {
+		super(callbacks, resources, name, title);
 	}
 
 	@Override

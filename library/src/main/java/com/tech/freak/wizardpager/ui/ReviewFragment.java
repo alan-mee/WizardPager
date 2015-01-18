@@ -40,11 +40,11 @@ import com.tech.freak.wizardpager.model.ReviewItem;
 
 public class ReviewFragment extends ListFragment implements ModelCallbacks
 {
-	private Callbacks mCallbacks;
-	private AbstractWizardModel mWizardModel;
-	private List<ReviewItem> mCurrentReviewItems;
+	private Callbacks _callbacks;
+	private AbstractWizardModel _wizardModel;
+	private List<ReviewItem> _currentReviewItems;
 
-	private ReviewAdapter mReviewAdapter;
+	private ReviewAdapter _reviewAdapter;
 
 	public ReviewFragment()
 	{
@@ -54,7 +54,7 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		mReviewAdapter = new ReviewAdapter();
+		_reviewAdapter = new ReviewAdapter();
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks
 		titleView.setTextColor(getResources().getColor(R.color.review_green));
 
 		ListView listView = (ListView) rootView.findViewById(android.R.id.list);
-		setListAdapter(mReviewAdapter);
+		setListAdapter(_reviewAdapter);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		return rootView;
 	}
@@ -82,10 +82,10 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks
 			throw new ClassCastException("Activity must implement fragment's callbacks");
 		}
 
-		mCallbacks = (Callbacks) activity;
+		_callbacks = (Callbacks) activity;
 
-		mWizardModel = mCallbacks.onGetModel();
-		mWizardModel.registerListener(this);
+		_wizardModel = _callbacks.onGetModel();
+		_wizardModel.registerListener(this);
 		onPageTreeChanged();
 	}
 
@@ -99,16 +99,16 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks
 	public void onDetach()
 	{
 		super.onDetach();
-		mCallbacks = null;
+		_callbacks = null;
 
-		mWizardModel.unregisterListener(this);
+		_wizardModel.unregisterListener(this);
 	}
 
 	@Override
 	public void onPageDataChanged(Page changedPage)
 	{
 		ArrayList<ReviewItem> reviewItems = new ArrayList<ReviewItem>();
-		for (Page page : mWizardModel.getCurrentPageSequence()) {
+		for (Page page : _wizardModel.getCurrentPageSequence()) {
 			page.getReviewItems(reviewItems);
 		}
 		Collections.sort(reviewItems, new Comparator<ReviewItem>()
@@ -119,17 +119,17 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks
 				return a.getWeight() > b.getWeight() ? +1 : a.getWeight() < b.getWeight() ? -1 : 0;
 			}
 		});
-		mCurrentReviewItems = reviewItems;
+		_currentReviewItems = reviewItems;
 
-		if (mReviewAdapter != null) {
-			mReviewAdapter.notifyDataSetInvalidated();
+		if (_reviewAdapter != null) {
+			_reviewAdapter.notifyDataSetInvalidated();
 		}
 	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id)
 	{
-		mCallbacks.onEditScreenAfterReview(mCurrentReviewItems.get(position).getPageKey());
+		_callbacks.onEditScreenAfterReview(_currentReviewItems.get(position).getPageKey());
 	}
 
 	public interface Callbacks
@@ -168,13 +168,13 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks
 		@Override
 		public Object getItem(int position)
 		{
-			return mCurrentReviewItems.get(position);
+			return _currentReviewItems.get(position);
 		}
 
 		@Override
 		public long getItemId(int position)
 		{
-			return mCurrentReviewItems.get(position).hashCode();
+			return _currentReviewItems.get(position).hashCode();
 		}
 
 		@Override
@@ -183,10 +183,10 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks
 			LayoutInflater inflater = LayoutInflater.from(getActivity());
 			View rootView = inflater.inflate(R.layout.list_item_review, container, false);
 
-			ReviewItem reviewItem = mCurrentReviewItems.get(position);
+			ReviewItem reviewItem = _currentReviewItems.get(position);
 			String value = reviewItem.getDisplayValue();
 			if (TextUtils.isEmpty(value)) {
-				value = "(None)";
+				value = getString(R.string.none);
 			}
 			((TextView) rootView.findViewById(android.R.id.text1)).setText(reviewItem.getTitle());
 			((TextView) rootView.findViewById(android.R.id.text2)).setText(value);
@@ -196,7 +196,7 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks
 		@Override
 		public int getCount()
 		{
-			return mCurrentReviewItems.size();
+			return _currentReviewItems.size();
 		}
 	}
 }

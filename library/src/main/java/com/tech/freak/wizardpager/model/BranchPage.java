@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.text.TextUtils;
 
 import com.tech.freak.wizardpager.ui.SingleChoiceFragment;
@@ -32,9 +33,9 @@ public class BranchPage extends SingleFixedChoicePage
 {
 	private List<Branch> _branches = new ArrayList<Branch>();
 
-	public BranchPage(ModelCallbacks callbacks, String name, String title)
+	public BranchPage(ModelCallbacks callbacks, Resources resources, String name, String title)
 	{
-		super(callbacks, name, title);
+		super(callbacks, resources, name, title);
 	}
 
 	@Override

@@ -17,6 +17,7 @@
 package com.tech.freak.wizardpager.model;
 
 import android.app.Fragment;
+import android.content.res.Resources;
 
 import java.util.ArrayList;
 
@@ -27,9 +28,9 @@ import com.tech.freak.wizardpager.ui.MultipleChoiceFragment;
  */
 public class MultipleFixedChoicePage extends SingleFixedChoicePage
 {
-	public MultipleFixedChoicePage(ModelCallbacks callbacks, String name, String title)
+	public MultipleFixedChoicePage(ModelCallbacks callbacks, Resources resources, String name, String title)
 	{
-		super(callbacks, name, title);
+		super(callbacks, resources, name, title);
 	}
 
 	@Override

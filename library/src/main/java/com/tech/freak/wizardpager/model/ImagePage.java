@@ -1,12 +1,13 @@
 package com.tech.freak.wizardpager.model;
 
 import android.app.Fragment;
+import android.content.res.Resources;
 
 import com.tech.freak.wizardpager.ui.ImageFragment;
 
 public class ImagePage extends TextPage
 {
-	public ImagePage(ModelCallbacks callbacks, String name, String title)
+	public ImagePage(ModelCallbacks callbacks, Resources resources, String name, String title)
 	{
 		super(callbacks, name, title);
 	}
