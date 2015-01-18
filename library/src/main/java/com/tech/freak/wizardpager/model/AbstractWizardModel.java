@@ -17,6 +17,7 @@
 package com.tech.freak.wizardpager.model;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -31,13 +32,20 @@ import java.util.List;
 public abstract class AbstractWizardModel implements ModelCallbacks
 {
 	protected Context _context;
+	protected Resources _res;
 
 	private List<ModelCallbacks> _listeners = new ArrayList<ModelCallbacks>();
 	private PageList _rootPageList;
 
+	protected String str(int resId)
+	{
+		return _res.getString(resId);
+	}
+
 	public AbstractWizardModel(Context context)
 	{
 		_context = context;
+		_res = context.getResources();
 		_rootPageList = onNewRootPageList();
 	}
 
