@@ -9,7 +9,7 @@ public class ImagePage extends TextPage
 {
 	public ImagePage(ModelCallbacks callbacks, Resources resources, String name, String title)
 	{
-		super(callbacks, name, title);
+		super(callbacks, resources, name, title);
 	}
 
 	@Override
