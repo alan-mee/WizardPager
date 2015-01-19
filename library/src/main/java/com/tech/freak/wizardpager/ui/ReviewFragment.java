@@ -58,8 +58,7 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View rootView = inflater.inflate(R.layout.fragment_page, container, false);
 

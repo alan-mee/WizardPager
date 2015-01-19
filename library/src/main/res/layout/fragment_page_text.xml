@@ -3,7 +3,9 @@
     style="@style/WizardPageContainer"
     android:orientation="vertical" >
 
-    <TextView style="@style/WizardPageTitle" />
+    <TextView style="@style/WizardPageTitle"
+							android:textIsSelectable="false"
+							android:inputType="none"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,7 +21,8 @@
                 android:id="@+id/editTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textImeMultiLine|textMultiLine"
+								android:minLines="3"/>
         </LinearLayout>
     </ScrollView>
 

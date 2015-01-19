@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="geo_status_searching">Waiting GPS &#8230;</string>
+	<string name="none">(ללא)</string>
+	<string name="review">סקירה</string>
+</resources>
