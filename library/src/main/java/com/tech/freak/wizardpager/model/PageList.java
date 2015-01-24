@@ -17,6 +17,7 @@
 package com.tech.freak.wizardpager.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a list of wizard pages.
@@ -54,5 +55,13 @@ public class PageList extends ArrayList<Page> implements PageTreeNode
 		for (Page childPage : this) {
 			childPage.flattenCurrentPageSequence(dest);
 		}
+	}
+
+	public void reverse()
+	{
+		List<Page> items = subList(0, size());
+		clear();
+		for (int ix = items.size()-1; ix > 0; ix--)
+			add(items.get(ix));
 	}
 }

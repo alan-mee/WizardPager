@@ -56,6 +56,11 @@ public abstract class AbstractWizardModel implements ModelCallbacks
 	 */
 	protected abstract PageList onNewRootPageList();
 
+	public void reversePages()
+	{
+		_rootPageList.reverse();
+	}
+
 	@Override
 	public void onPageDataChanged(Page page)
 	{

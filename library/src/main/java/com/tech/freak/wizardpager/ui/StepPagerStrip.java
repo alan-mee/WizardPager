@@ -141,14 +141,14 @@ public class StepPagerStrip extends View
 				- (mPageCount - 1) * mTabSpacing) / mPageCount;
 		}
 
-		for (int i = 0; i < mPageCount; i++) {
-			mTempRectF.left = totalLeft + (i * (tabWidth + mTabSpacing));
+		for (int ix = 0; ix < mPageCount; ix++) {
+			mTempRectF.left = totalLeft + (ix * (tabWidth + mTabSpacing));
 			mTempRectF.right = mTempRectF.left + tabWidth;
-			canvas.drawRect(mTempRectF, i < mCurrentPage
+			canvas.drawRect(mTempRectF, ix < mCurrentPage
 				? mPrevTabPaint
-				: (i > mCurrentPage
+				: (ix > mCurrentPage
 				? mNextTabPaint
-				: (i == mPageCount - 1
+				: (ix == mPageCount - 1
 				? mSelectedLastTabPaint
 				: mSelectedTabPaint)));
 		}
